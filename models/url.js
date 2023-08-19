@@ -8,6 +8,7 @@ const urlSchema = new mongoose.Schema(
   {
     versionKey: false,
   }
+  
 );
 
 const Url = mongoose.model("Url", urlSchema);

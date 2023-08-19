@@ -14,7 +14,7 @@ const { log } = require("console");
 
 var app = cors();
 var app = express();
-var PORT = process.env.PORT || 8080;
+// var PORT = process.env.PORT || 8080;
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -24,11 +24,12 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/", urlRouter);
+app.use("/url/api", urlRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -60,7 +61,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("connected to database");
+    console.log("Database established sucessfully");
   })
   .catch((err) => {
     console.log("Can't connect to database: ", err);
@@ -68,8 +69,8 @@ mongoose
 
 // module.exports = mongoose;
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server listening on port ${PORT}`);
+// });
 
 module.exports = app;
